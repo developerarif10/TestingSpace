@@ -22,7 +22,7 @@ export const Navbar = () => {
           <div className="w-9 h-9 bg-gradient-to-br from-brand-600 to-brand-700 rounded-xl flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-brand-600/20 group-hover:scale-105 transition-transform duration-300">
             E
           </div>
-          <span className="font-bold text-xl tracking-tight text-ink group-hover:text-brand-600 transition-colors">EduQuest</span>
+          <span className="font-bold text-xl tracking-tight text-ink group-hover:text-brand-600 transition-colors">TestingSpace</span>
         </Link>
         
         <nav>

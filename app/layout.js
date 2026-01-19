@@ -4,7 +4,7 @@ import { Navbar } from '../components/Navbar';
 import '../styles/globals.css';
 
 export const metadata = {
-  title: 'EduQuest | Master Your Skills',
+  title: 'TestingSpace | Master Your Skills',
   description: 'A premium EdTech testing platform.',
 };
 
@@ -85,7 +85,7 @@ export default function RootLayout({ children }) {
           <footer className="bg-white border-t border-ink-100 py-12 relative z-10">
             <div className="max-w-7xl mx-auto px-4 text-center">
               <p className="text-ink-400 text-sm font-medium">
-                &copy; {new Date().getFullYear()} EduQuest. Designed with precision.
+                &copy; {new Date().getFullYear()} TestingSpace. Designed with precision.
               </p>
             </div>
           </footer>

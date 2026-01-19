@@ -34,7 +34,7 @@ export default function Signup() {
       <div className="bg-white/80 backdrop-blur-xl rounded-3xl shadow-glass border border-white p-1">
         <div className="bg-white rounded-[20px] p-8 sm:p-10 shadow-sm">
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-ink-900 mb-3 tracking-tight">Join EduQuest</h2>
+            <h2 className="text-3xl font-bold text-ink-900 mb-3 tracking-tight">Join TestingSpace</h2>
             <p className="text-ink-500 text-sm font-medium">Start your journey to mastery today.</p>
           </div>
 

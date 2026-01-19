@@ -22,7 +22,7 @@ export const Layout = ({ children }) => {
             <div className="w-9 h-9 bg-gradient-to-br from-brand-600 to-brand-700 rounded-xl flex items-center justify-center text-white font-bold text-lg shadow-lg shadow-brand-600/20 group-hover:scale-105 transition-transform duration-300">
               E
             </div>
-            <span className="font-bold text-xl tracking-tight text-ink group-hover:text-brand-600 transition-colors">EduQuest</span>
+            <span className="font-bold text-xl tracking-tight text-ink group-hover:text-brand-600 transition-colors">TestingSpace</span>
           </Link>
           
           <nav>
@@ -52,7 +52,7 @@ export const Layout = ({ children }) => {
       <footer className="bg-white border-t border-ink-100 py-12 relative z-10">
         <div className="max-w-7xl mx-auto px-4 text-center">
           <p className="text-ink-400 text-sm font-medium">
-            &copy; {new Date().getFullYear()} EduQuest. Designed with precision.
+            &copy; {new Date().getFullYear()} TestingSpace. Designed with precision.
           </p>
         </div>
       </footer>

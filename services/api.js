@@ -1,8 +1,8 @@
 import { SAMPLE_QUESTIONS } from './mockData.js';
 
 const STORAGE_KEYS = {
-  USER: 'eduquest_user',
-  ATTEMPTS: 'eduquest_attempts',
+  USER: 'TestingSpace_user',
+  ATTEMPTS: 'TestingSpace_attempts',
 };
 
 export const api = {
