@@ -1,6 +1,7 @@
 'use client';
 
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import { createClient } from '@/utils/supabase/client';
+import { createContext, useContext, useEffect, useState } from 'react';
 import { api } from '../services/api';
 
 const AuthContext = createContext(undefined);
@@ -10,10 +11,24 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const supabase = createClient();
+    
     // Check for active session on mount
-    const sessionUser = api.auth.getSession();
-    setUser(sessionUser);
-    setLoading(false);
+    const checkUser = async () => {
+      const { data: { session } } = await supabase.auth.getSession();
+      setUser(session?.user ?? null);
+      setLoading(false);
+    };
+
+    checkUser();
+
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+      setLoading(false);
+    });
+
+    return () => subscription.unsubscribe();
   }, []);
 
   const signIn = async (email, pass) => {

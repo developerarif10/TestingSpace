@@ -1,3 +1,4 @@
+import { createClient } from '@/utils/supabase/client';
 import { SAMPLE_QUESTIONS } from './mockData.js';
 
 const STORAGE_KEYS = {
@@ -8,35 +9,37 @@ const STORAGE_KEYS = {
 export const api = {
   auth: {
     signUp: async (email, password) => {
-      await new Promise(r => setTimeout(r, 800)); 
-      
-      if (email.includes('error')) return { user: null, error: 'User already exists' };
-      
-      const user = { id: crypto.randomUUID(), email, full_name: email.split('@')[0] };
-      localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(user));
-      return { user, error: null };
+      const supabase = createClient();
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          emailRedirectTo: `${window.location.origin}/auth/callback`,
+        },
+      });
+      console.log("Signup response:", { data, error });
+      return { user: data.user, error: error?.message };
     },
     
     signIn: async (email, password) => {
-      await new Promise(r => setTimeout(r, 800));
-      
-      if (password.length < 6) return { user: null, error: 'Invalid credentials' };
-      
-      const user = { id: 'mock-user-id', email, full_name: email.split('@')[0] };
-      localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(user));
-      return { user, error: null };
+      const supabase = createClient();
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+      return { user: data.user, error: error?.message };
     },
     
     signOut: async () => {
+      const supabase = createClient();
+      await supabase.auth.signOut();
       localStorage.removeItem(STORAGE_KEYS.USER);
     },
     
-    getSession: () => {
-      // Ensure we are in browser environment before accessing localStorage
-      if (typeof window === 'undefined') return null;
-      
-      const stored = localStorage.getItem(STORAGE_KEYS.USER);
-      return stored ? JSON.parse(stored) : null;
+    getSession: async () => {
+      const supabase = createClient();
+      const { data: { session }, error } = await supabase.auth.getSession();
+      return session?.user || null;
     }
   },
 

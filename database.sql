@@ -1,6 +1,6 @@
 -- Users table is handled by Supabase Auth (auth.users)
 -- We create a public profiles table to store extra info
-create table public.profiles (
+create table if not exists public.profiles (
   id uuid references auth.users not null primary key,
   email text,
   full_name text,
@@ -13,8 +13,28 @@ create policy "Public profiles are viewable by everyone." on public.profiles for
 create policy "Users can insert their own profile." on public.profiles for insert with check (auth.uid() = id);
 create policy "Users can update own profile." on public.profiles for update using (auth.uid() = id);
 
+-- Function to handle new user signup (automatically creates a profile)
+create or replace function public.handle_new_user()
+returns trigger
+language plpgsql
+security definer set search_path = public
+as $$
+begin
+  insert into public.profiles (id, email, full_name)
+  values (new.id, new.email, new.raw_user_meta_data ->> 'full_name');
+  return new;
+end;
+$$;
+
+-- Trigger to call the function on new user signup
+-- Drop if exists to avoid errors on re-run
+drop trigger if exists on_auth_user_created on auth.users;
+create trigger on_auth_user_created
+  after insert on auth.users
+  for each row execute procedure public.handle_new_user();
+
 -- Tests/Quizzes Table
-create table public.tests (
+create table if not exists public.tests (
   id uuid default uuid_generate_v4() primary key,
   title text not null,
   description text,
@@ -23,7 +43,7 @@ create table public.tests (
 );
 
 -- Questions Table
-create table public.questions (
+create table if not exists public.questions (
   id uuid default uuid_generate_v4() primary key,
   test_id uuid references public.tests(id),
   text text not null,
@@ -34,7 +54,7 @@ create table public.questions (
 );
 
 -- Options Table
-create table public.options (
+create table if not exists public.options (
   id uuid default uuid_generate_v4() primary key,
   question_id uuid references public.questions(id) not null,
   text text not null,
@@ -43,7 +63,7 @@ create table public.options (
 );
 
 -- Attempts Table (Stores the high-level result)
-create table public.attempts (
+create table if not exists public.attempts (
   id uuid default uuid_generate_v4() primary key,
   user_id uuid references public.profiles(id) not null,
   test_id uuid references public.tests(id),
@@ -55,7 +75,7 @@ create table public.attempts (
 );
 
 -- User Answers Table (Detailed log for analysis)
-create table public.user_answers (
+create table if not exists public.user_answers (
   id uuid default uuid_generate_v4() primary key,
   attempt_id uuid references public.attempts(id) not null,
   question_id uuid references public.questions(id) not null,
@@ -64,7 +84,7 @@ create table public.user_answers (
 );
 
 -- Indexes for Performance
-create index idx_questions_test_id on public.questions(test_id);
-create index idx_options_question_id on public.options(question_id);
-create index idx_attempts_user_id on public.attempts(user_id);
-create index idx_user_answers_attempt_id on public.user_answers(attempt_id);
+create index if not exists idx_questions_test_id on public.questions(test_id);
+create index if not exists idx_options_question_id on public.options(question_id);
+create index if not exists idx_attempts_user_id on public.attempts(user_id);
+create index if not exists idx_user_answers_attempt_id on public.user_answers(attempt_id);
