@@ -1,15 +1,15 @@
 # TestingSpace
 
-A modern Next.js application integrated with Supabase for authentication and data management.
+Master Your Skills with Precision Testing - A modern Next.js application integrated with Supabase for authentication and data management.
 
-## 🚀 Tech Stack
+##  Tech Stack
 
-*   **Framework**: [Next.js 14](https://nextjs.org/) (App Router)
-*   **Language**: JavaScript
+*   **Framework**: [Next.js 16](https://nextjs.org/) (App Router)
+*   **Language**: JavaScript, PostgreSQL
 *   **Authentication & Database**: [Supabase](https://supabase.com/)
-*   **Styling**: Vanilla CSS / CSS Modules
+*   **Styling**: Tailwind CSS / Vanilla CSS / CSS Modules
 
-## 📂 Project Structure
+##  Project Structure
 
 ```
 ├── app/                  # App Router pages (Home, Login, Dashboard, etc.)
@@ -20,7 +20,7 @@ A modern Next.js application integrated with Supabase for authentication and dat
 └── styles/               # Global styles
 ```
 
-## 🛠️ Getting Started
+##  Getting Started
 
 ### 1. Clone the repository
 
@@ -52,7 +52,7 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## 🔑 Key Features
+##  Key Features
 
 *   **Authentication**: Secure Sign Up and Login using Supabase Auth.
 *   **Protected Routes**: Middleware integration to protect dashboard and test routes.
