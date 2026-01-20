@@ -28,7 +28,7 @@ export const Navbar = () => {
   return (
     <>
       <header className="fixed w-full top-0 z-40 glass-panel border-b border-white/50 shadow-sm transition-all duration-300">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 sm:h-20 flex items-center justify-between">
+        <div className="max-w-7xl py-2 lg:py-0 mx-auto px-4 sm:px-6 lg:px-8 h-18 sm:h-20 flex items-center justify-between">
           <Link href={user ? "/dashboard" : "/"} className="flex items-center gap-3 cursor-pointer group relative z-50">
            <Image src="/images/logo.webp" alt="Logo" width={150} height={120} className="w-auto h-8 sm:h-10" />
           </Link>
