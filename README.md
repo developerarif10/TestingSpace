@@ -1,20 +1,59 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# TestingSpace
 
-# Run and deploy your AI Studio app
+A modern Next.js application integrated with Supabase for authentication and data management.
 
-This contains everything you need to run your app locally.
+## 🚀 Tech Stack
 
-View your app in AI Studio: https://ai.studio/apps/drive/117Sep-5xVY31w0n4TeIIcMfUgeWCr9hf
+*   **Framework**: [Next.js 14](https://nextjs.org/) (App Router)
+*   **Language**: JavaScript
+*   **Authentication & Database**: [Supabase](https://supabase.com/)
+*   **Styling**: Vanilla CSS / CSS Modules
 
-## Run Locally
+## 📂 Project Structure
 
-**Prerequisites:**  Node.js
+```
+├── app/                  # App Router pages (Home, Login, Dashboard, etc.)
+├── components/           # Reusable UI components (Navbar, Loader, etc.)
+├── services/             # API services and mock data
+├── utils/                # Utilities and Supabase client configuration
+├── public/               # Static assets
+└── styles/               # Global styles
+```
 
+## 🛠️ Getting Started
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+### 1. Clone the repository
+
+```bash
+git clone <repository-url>
+cd testingspace
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Configure Environment Variables
+
+Create a `.env.local` file in the root directory and add your Supabase credentials:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+### 4. Run the development server
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## 🔑 Key Features
+
+*   **Authentication**: Secure Sign Up and Login using Supabase Auth.
+*   **Protected Routes**: Middleware integration to protect dashboard and test routes.
+*   **Responsive Design**: Mobile-friendly layout and components.
