@@ -6,6 +6,19 @@ const STORAGE_KEYS = {
   ATTEMPTS: 'TestingSpace_attempts',
 };
 
+const getURL = () => {
+  let url =
+    process.env.NEXT_PUBLIC_SITE_URL ?? // Set this to your site URL in production env.
+    process.env.NEXT_PUBLIC_VERCEL_URL ?? // Automatically set by Vercel.
+    (typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000/');
+
+  // Make sure to include `https://` when not localhost.
+  url = url.includes('http') ? url : `https://${url}`;
+  // Make sure to include a trailing `/`.
+  url = url.charAt(url.length - 1) === '/' ? url : `${url}/`;
+  return url;
+};
+
 export const api = {
   auth: {
     signUp: async (email, password) => {
@@ -14,7 +27,7 @@ export const api = {
         email,
         password,
         options: {
-          emailRedirectTo: `${window.location.origin}/auth/callback`,
+          emailRedirectTo: `${getURL()}auth/callback`,
         },
       });
       console.log("Signup response:", { data, error });
